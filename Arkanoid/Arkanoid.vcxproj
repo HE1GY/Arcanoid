@@ -102,7 +102,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;DEBUG;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Framework\Include;</AdditionalIncludeDirectories>
@@ -111,7 +111,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Framework\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>FrameworkRelease_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>FrameworkRelease_x64.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,20 +131,91 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Framework\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>FrameworkRelease_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>FrameworkRelease_x64.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\Game\GameObject.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\GameLogic.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\Game\GameFactory.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\GameFactory.h" />
     <ClInclude Include="src\GameLogic.h" />
+    <ClInclude Include="src\Game\GameObject.h" />
+    <ClInclude Include="src\Game\GameObjectParameters.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Utility.h" />
     <ClInclude Include="src\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\data\01-Breakout-Tiles.png" />
+    <Image Include="res\data\02-Breakout-Tiles.png" />
+    <Image Include="res\data\03-Breakout-Tiles.png" />
+    <Image Include="res\data\04-Breakout-Tiles.png" />
+    <Image Include="res\data\05-Breakout-Tiles.png" />
+    <Image Include="res\data\06-Breakout-Tiles.png" />
+    <Image Include="res\data\07-Breakout-Tiles.png" />
+    <Image Include="res\data\08-Breakout-Tiles.png" />
+    <Image Include="res\data\09-Breakout-Tiles.png" />
+    <Image Include="res\data\10-Breakout-Tiles.png" />
+    <Image Include="res\data\11-Breakout-Tiles.png" />
+    <Image Include="res\data\12-Breakout-Tiles.png" />
+    <Image Include="res\data\13-Breakout-Tiles.png" />
+    <Image Include="res\data\14-Breakout-Tiles.png" />
+    <Image Include="res\data\15-Breakout-Tiles.png" />
+    <Image Include="res\data\16-Breakout-Tiles.png" />
+    <Image Include="res\data\17-Breakout-Tiles.png" />
+    <Image Include="res\data\18-Breakout-Tiles.png" />
+    <Image Include="res\data\19-Breakout-Tiles.png" />
+    <Image Include="res\data\20-Breakout-Tiles.png" />
+    <Image Include="res\data\21-Breakout-Tiles.png" />
+    <Image Include="res\data\22-Breakout-Tiles.png" />
+    <Image Include="res\data\23-Breakout-Tiles.png" />
+    <Image Include="res\data\24-Breakout-Tiles.png" />
+    <Image Include="res\data\25-Breakout-Tiles.png" />
+    <Image Include="res\data\26-Breakout-Tiles.png" />
+    <Image Include="res\data\27-Breakout-Tiles.png" />
+    <Image Include="res\data\28-Breakout-Tiles.png" />
+    <Image Include="res\data\29-Breakout-Tiles.png" />
+    <Image Include="res\data\30-Breakout-Tiles.png" />
+    <Image Include="res\data\31-Breakout-Tiles.png" />
+    <Image Include="res\data\32-Breakout-Tiles.png" />
+    <Image Include="res\data\33-Breakout-Tiles.png" />
+    <Image Include="res\data\34-Breakout-Tiles.png" />
+    <Image Include="res\data\35-Breakout-Tiles.png" />
+    <Image Include="res\data\36-Breakout-Tiles.png" />
+    <Image Include="res\data\37-Breakout-Tiles.png" />
+    <Image Include="res\data\38-Breakout-Tiles.png" />
+    <Image Include="res\data\39-Breakout-Tiles.png" />
+    <Image Include="res\data\40-Breakout-Tiles.png" />
+    <Image Include="res\data\41-Breakout-Tiles.png" />
+    <Image Include="res\data\42-Breakout-Tiles.png" />
+    <Image Include="res\data\43-Breakout-Tiles.png" />
+    <Image Include="res\data\44-Breakout-Tiles.png" />
+    <Image Include="res\data\45-Breakout-Tiles.png" />
+    <Image Include="res\data\46-Breakout-Tiles.png" />
+    <Image Include="res\data\47-Breakout-Tiles.png" />
+    <Image Include="res\data\48-Breakout-Tiles.png" />
+    <Image Include="res\data\49-Breakout-Tiles.png" />
+    <Image Include="res\data\50-Breakout-Tiles.png" />
+    <Image Include="res\data\51-Breakout-Tiles.png" />
+    <Image Include="res\data\52-Breakout-Tiles.png" />
+    <Image Include="res\data\53-Breakout-Tiles.png" />
+    <Image Include="res\data\54-Breakout-Tiles.png" />
+    <Image Include="res\data\55-Breakout-Tiles.png" />
+    <Image Include="res\data\56-Breakout-Tiles.png" />
+    <Image Include="res\data\57-Breakout-Tiles.png" />
+    <Image Include="res\data\58-Breakout-Tiles.png" />
+    <Image Include="res\data\59-Breakout-Tiles.png" />
+    <Image Include="res\data\60-Breakout-Tiles.png" />
+    <Image Include="res\data\61-Breakout-Tiles.png" />
+    <Image Include="res\data\62-Breakout-Tiles.png" />
+    <Image Include="res\data\63-Breakout-Tiles.png" />
+    <Image Include="res\data\64-Breakout-Tiles.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

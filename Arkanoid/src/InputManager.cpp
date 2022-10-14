@@ -1,9 +1,8 @@
 #include "InputManager.h"
 #include <iostream>
 
-#ifdef DEBUG
 #include "Utility.h"
-#endif 
+
 
 
 namespace ArcanoidGame

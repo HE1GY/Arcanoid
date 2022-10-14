@@ -15,7 +15,7 @@ public:
 	{
 		_window = std::make_unique<ArcanoidGame::Window>();
 		_input = std::make_unique<ArcanoidGame::InputManager>();
-		_gameLogic = std::make_unique<ArcanoidGame::GameLogic>();
+		_gameLogic = std::make_unique<ArcanoidGame::GameLogic>(_input.get());
 	}
 
 	~Arkanoid()override
@@ -29,7 +29,10 @@ public:
 
 	bool Init()override
 	{
-		return _window->TryInit();
+		bool windiwInit = _window->TryInit();
+		bool gameInit = _gameLogic->TryInit();
+
+		return windiwInit && gameInit;
 	}
 
 	void Close()override
@@ -86,16 +89,30 @@ private:
 	std::unique_ptr<ArcanoidGame::GameLogic> _gameLogic;
 };
 
+void ParseWindowParameters(int& width, int& heigth, int& argc, char* argv[]);
 
 int main(int argc, char* argv[])
 {
-	int width=960;
-	int height = 540;
+	int width;
+	int height;
+	ParseWindowParameters(width, height, argc, argv);
+
+	std::unique_ptr<Arkanoid> arcanoid = std::make_unique<Arkanoid>();
+	arcanoid->SetWindowParameters(width, height, false);
+
+
+	return run(arcanoid.get());
+}
+
+void ParseWindowParameters(int& width, int& height, int& argc, char* argv[])
+{
+	width = 960;
+	height = 540;
 	int windowArgCount = 0;
 
 	for(size_t i = 0; i < argc; i++)
 	{
-		if(strcmp(argv[i],"-window")==0)
+		if(strcmp(argv[i], "-window") == 0)
 		{
 			windowArgCount = 2;
 		}
@@ -110,11 +127,8 @@ int main(int argc, char* argv[])
 			windowArgCount--;
 		}
 	}
-
-	std::unique_ptr<Arkanoid> arcanoid = std::make_unique<Arkanoid>();
-	arcanoid->SetWindowParameters(width, height, false);
-	int code = run(arcanoid.get());
-	return code;
 }
+
+
 
 

@@ -16,6 +16,7 @@ namespace ArcanoidGame
 	}
 	bool Window::TryInit()
 	{
+
 		return true;
 	}
 	void Window::OnClose()
