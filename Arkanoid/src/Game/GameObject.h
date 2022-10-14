@@ -1,11 +1,15 @@
 #pragma once
 #include "GameObjectParameters.h"
+#include "InputManager.h"
+#include <vector>
+#include "IComponent.h"
 
 
-extern class Sprite;
 
 namespace ArcanoidGame
 {
+	class IComponent;
+
 	class GameObject
 	{
 	public:
@@ -15,8 +19,13 @@ namespace ArcanoidGame
 
 		 void GetSize(int& w, int& h);
 		 void SetSize(int w, int h);
-		 void Destroy();
+
+		 void AddComponent(IComponent* component);
+
+		 virtual void Destroy();
+		 void UpdateComponents();
 	private:
 		Size _size;
+		std::vector <IComponent*> _components;
 	};
 }

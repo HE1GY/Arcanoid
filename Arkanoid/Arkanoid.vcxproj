@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Framework\Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src/Game;src/Game/Components;src;$(SolutionDir)Dependencies\Framework\Include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\Components\InputComponent.cpp" />
     <ClCompile Include="src\Game\GameObject.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\GameLogic.cpp" />
@@ -143,6 +144,8 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\Components\IComponent.h" />
+    <ClInclude Include="src\Game\Components\InputComponent.h" />
     <ClInclude Include="src\Game\GameFactory.h" />
     <ClInclude Include="src\GameLogic.h" />
     <ClInclude Include="src\Game\GameObject.h" />

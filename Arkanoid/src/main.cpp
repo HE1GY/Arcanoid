@@ -15,7 +15,7 @@ public:
 	{
 		_window = std::make_unique<ArcanoidGame::Window>();
 		_input = std::make_unique<ArcanoidGame::InputManager>();
-		_gameLogic = std::make_unique<ArcanoidGame::GameLogic>(_input.get());
+		_gameLogic = std::make_unique<ArcanoidGame::GameLogic>();
 	}
 
 	~Arkanoid()override
@@ -128,7 +128,6 @@ void ParseWindowParameters(int& width, int& height, int& argc, char* argv[])
 		}
 	}
 }
-
 
 
 

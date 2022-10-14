@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Framework.h"
+#include "IComponent.h"
 
 namespace ArcanoidGame
 {
@@ -14,8 +15,27 @@ namespace ArcanoidGame
 		_size.Height=h;
 		setSpriteSize(Sprite, w, h);
 	}
+
+	void GameObject::AddComponent(IComponent* component)
+	{
+		component->Parent = this;
+		_components.push_back(component);
+	}
+
+
+	void GameObject::UpdateComponents()
+	{
+		for(auto& component: _components)
+		{
+			component->Update();
+		}
+	}
+
+
 	void GameObject::Destroy()
 	{
 		destroySprite(Sprite);
 	}
+
+
 }
