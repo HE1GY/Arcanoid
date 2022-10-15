@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObjectParameters.h"
+#include "Vector.h"
 #include "InputManager.h"
 #include <vector>
 #include "IComponent.h"
@@ -13,8 +13,8 @@ namespace ArcanoidGame
 	class GameObject
 	{
 	public:
-		Position Position;
-		Sprite* Sprite;
+		Vector Position;
+		Sprite* Sprite; 
 		//Colider
 
 		 void GetSize(int& w, int& h);
@@ -25,7 +25,7 @@ namespace ArcanoidGame
 		 virtual void Destroy();
 		 void UpdateComponents();
 	private:
-		Size _size;
+		Vector _size;
 		std::vector <IComponent*> _components;
 	};
 }

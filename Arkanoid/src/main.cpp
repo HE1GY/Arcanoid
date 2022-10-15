@@ -7,6 +7,8 @@
 #include "iostream"
 #include <stdlib.h>
 
+#include "Vector.h"
+
 
 class Arkanoid : public Framework
 {
@@ -100,8 +102,8 @@ int main(int argc, char* argv[])
 	std::unique_ptr<Arkanoid> arcanoid = std::make_unique<Arkanoid>();
 	arcanoid->SetWindowParameters(width, height, false);
 
-
 	return run(arcanoid.get());
+
 }
 
 void ParseWindowParameters(int& width, int& height, int& argc, char* argv[])

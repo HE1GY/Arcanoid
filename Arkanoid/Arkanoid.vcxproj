@@ -135,6 +135,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\CollisionSystem.cpp" />
+    <ClCompile Include="src\Game\Components\BallMover.cpp" />
+    <ClCompile Include="src\Game\Components\BoxCollider.cpp" />
+    <ClCompile Include="src\Game\Components\CirculCollider.cpp" />
     <ClCompile Include="src\Game\Components\InputComponent.cpp" />
     <ClCompile Include="src\Game\GameObject.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -144,12 +148,17 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\CollisionSystem.h" />
+    <ClInclude Include="src\Game\Components\BallMover.h" />
+    <ClInclude Include="src\Game\Components\BoxCollider.h" />
+    <ClInclude Include="src\Game\Components\CirculCollider.h" />
+    <ClInclude Include="src\Game\Components\ICollider.h" />
     <ClInclude Include="src\Game\Components\IComponent.h" />
     <ClInclude Include="src\Game\Components\InputComponent.h" />
     <ClInclude Include="src\Game\GameFactory.h" />
     <ClInclude Include="src\GameLogic.h" />
     <ClInclude Include="src\Game\GameObject.h" />
-    <ClInclude Include="src\Game\GameObjectParameters.h" />
+    <ClInclude Include="src\Game\Vector.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Utility.h" />
     <ClInclude Include="src\Window.h" />

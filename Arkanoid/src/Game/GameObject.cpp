@@ -6,13 +6,13 @@ namespace ArcanoidGame
 {
 	void GameObject::GetSize(int& w, int& h)
 	{
-		w = _size.Width;
-		h = _size.Height;
+		w = _size.X;
+		h = _size.Y;
 	}
 	void GameObject::SetSize(int w, int h)
 	{
-		_size.Width = w;
-		_size.Height=h;
+		_size.X = w;
+		_size.Y=h;
 		setSpriteSize(Sprite, w, h);
 	}
 
