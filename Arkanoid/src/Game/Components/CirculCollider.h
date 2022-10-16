@@ -1,6 +1,6 @@
 #pragma once
 #include "ICollider.h"
-
+#include "BallMover.h"
 
 namespace ArcanoidGame
 {
@@ -10,7 +10,11 @@ namespace ArcanoidGame
 		int Radius;
 		Vector Center;
 
-		void OnCollision(GameObject& other)override;
+		CirculCollider(BallMover* ballMover);
+		Vector& GetNormalAt(Vector& point)override;
+		void OnCollision(ICollider& other, Vector& contactPoint)override;
 		void Update()override;
+	private:
+		BallMover* _ballMover;
 	};
 }

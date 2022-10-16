@@ -6,20 +6,46 @@ namespace ArcanoidGame
 	{
 		int w, h;
 		Parent->GetSize(w, h);
-		_top = Parent->Position.Y;
-		_down = Parent->Position.Y+2*h;
-		_right = Parent->Position.X +2*w;
-		_left = Parent->Position.X;
+		Center = Parent->Position+Vector(w/2, h/2);
+		_top = Parent->Position+Vector(w/2,0);
+		_down = Parent->Position+Vector(w/2, h);
+		_right = Parent->Position+Vector(w,h/2);
+		_left = Parent->Position + Vector(0, h/2);
 	}
-	Vector& BoxCollider::ClosestPoint(Vector& target)
+	Vector& BoxCollider::ClosestPointTo(Vector& target)
 	{
-		int clX = std::clamp(target.X, _left, _right);
-		int clY = std::clamp(target.Y, _top,_down );
-
-		return *(new Vector(clX, clY));
+		return Vector::Clamp(target, _top, _down, _right, _left);;
 	}
 
-	void BoxCollider::OnCollision(GameObject& other)
+	Vector& BoxCollider::GetNormalAt(Vector& point)
+	{
+		Vector* normal = new Vector();
+
+		if( abs(point.Y - _top.Y) <= 1)
+		{
+			*normal += Vector(0, -1);
+		}
+
+		if(abs(point.X - _right.X) <= 1)
+		{
+			*normal += Vector(1, 0);
+		}
+
+		if(abs(point.Y - _down.Y) <= 1)
+		{
+			*normal += Vector(0, 1);
+		}
+
+		if(abs(point.X - _left.X) <= 1)
+		{
+			*normal += Vector(-1, 0);
+		}
+
+		normal->Normalize();
+		return *normal;
+	}
+
+	void BoxCollider::OnCollision(ICollider& other, Vector& contactPoint)
 	{
 		
 	}

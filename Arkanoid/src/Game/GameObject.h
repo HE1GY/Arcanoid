@@ -15,7 +15,6 @@ namespace ArcanoidGame
 	public:
 		Vector Position;
 		Sprite* Sprite; 
-		//Colider
 
 		 void GetSize(int& w, int& h);
 		 void SetSize(int w, int h);

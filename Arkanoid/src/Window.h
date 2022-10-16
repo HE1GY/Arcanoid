@@ -9,9 +9,11 @@ namespace ArcanoidGame
 		void SetParameters(int width, int height, bool fullscreen);
 		bool TryInit();
 		void OnClose();
+
+		 int Width;
+		 int Height;
+
 	private:
-		 int _width;
-		 int _height;
 		bool _fullscreen;
 	};
 }

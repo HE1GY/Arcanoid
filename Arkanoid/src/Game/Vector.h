@@ -8,13 +8,13 @@ namespace ArcanoidGame
 	class Vector
 	{
 	public:
-		int X, Y;
+		float X, Y;
 		Vector():
-			X(0.f),Y(0.f)
+			X(0),Y(0)
 		{
 		}
 
-		Vector(int x, int y) :
+		Vector(float x, float y) :
 			X(x), Y(y)
 		{
 		}
@@ -26,28 +26,60 @@ namespace ArcanoidGame
 		}
 
 
-		static int Magnitude(Vector& a, Vector& b)
+		static float MagnitudeBetween(Vector& a, Vector& b)
 		{
 			return sqrt((b.X - a.X) * (b.X - a.X) + ((b.Y - a.Y) * (b.Y - a.Y)));
 		}
-
-		static Vector& Clamp(Vector& vector, Vector& min, Vector& max)
+		static Vector& Clamp(Vector& vector, Vector& top, Vector& down, Vector& right, Vector& left)
 		{
-			return *(new Vector(std::clamp(vector.X, min.X,max.X), std::clamp(vector.Y, min.Y, max.Y)));
+			return *(new Vector(std::clamp(vector.X, left.X, right.X), std::clamp(vector.Y, top.Y, down.Y)));
+		}
+		static float DotProduct(Vector& a, Vector& b)
+		{
+			return (a.X*b.X)+(a.Y*b.Y);
+		}
+
+		static Vector& Reflect(Vector& direction, Vector& normal)
+		{
+			Vector& flippefNormal = normal * -1;
+			Vector& projection = normal *DotProduct(direction,flippefNormal);
+			Vector& reflected= (direction + (projection * 2 ));
+			return reflected;
+		}
+
+
+
+
+		float Magnitude()
+		{
+			return sqrt(this->X* this->X  + this->Y * this->Y);
+		}
+
+		
+
+		void Normalize()
+		{
+			float magnitude = Magnitude();
+			this->X /= magnitude;
+			this->Y /= magnitude;
 		}
 
 
 		Vector& operator + (const Vector& vector)
 		{
-			this->X += vector.X;
-			this->Y += vector.Y;
-			return *this;
+			Vector* newVector = new Vector(this->X + vector.X, this->Y + vector.Y);
+			return *newVector;
 		}
-		Vector& operator * (const int& a)
+
+		Vector& operator - (const Vector& vector)
 		{
-			this->X *= a;
-			this->Y *= a;
-			return *this;
+			Vector* newVector = new Vector(this->X - vector.X, this->Y - vector.Y);
+			return *newVector;
+		}
+		Vector& operator * (const float& a)
+		{
+			Vector* newVector = new Vector(this->X * a, this->Y * a);
+			return *newVector;
 		}
 
 		Vector& operator = ( const Vector& vector)
@@ -59,7 +91,9 @@ namespace ArcanoidGame
 
 		Vector& operator += (const Vector& vector)
 		{
-			return *this + vector;
+			this->X += vector.X;
+			this->Y += vector.Y;
+			return *this;
 		}
 
 	};

@@ -15,9 +15,9 @@ class Arkanoid : public Framework
 public:
 	Arkanoid()
 	{
-		_window = std::make_unique<ArcanoidGame::Window>();
+		_window = std::make_shared<ArcanoidGame::Window>();
 		_input = std::make_unique<ArcanoidGame::InputManager>();
-		_gameLogic = std::make_unique<ArcanoidGame::GameLogic>();
+		_gameLogic = std::make_unique<ArcanoidGame::GameLogic>(_window);
 	}
 
 	~Arkanoid()override
@@ -86,7 +86,7 @@ public:
 
 
 private:
-	std::unique_ptr<ArcanoidGame::Window> _window;
+	std::shared_ptr<ArcanoidGame::Window> _window;
 	std::unique_ptr<ArcanoidGame::InputManager> _input;
 	std::unique_ptr<ArcanoidGame::GameLogic> _gameLogic;
 };

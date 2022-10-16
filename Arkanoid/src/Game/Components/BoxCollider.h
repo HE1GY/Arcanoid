@@ -6,10 +6,12 @@ namespace ArcanoidGame
 	class BoxCollider : public ICollider
 	{
 	public:
-		Vector& ClosestPoint(Vector& target);
+		Vector Center;
+		Vector& ClosestPointTo(Vector& target);
 		void Update()override;
-		void OnCollision(GameObject& other)override;
+		void OnCollision(ICollider& other, Vector& contactPoint)override;
+		Vector& GetNormalAt(Vector& point)override;
 	private:
-		int _top, _down, _right, _left;
+		Vector _top, _down, _right, _left;
 	};
 }

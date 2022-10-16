@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include "CollisionSystem.h"
+#include "Window.h"
 
 
 namespace ArcanoidGame
@@ -11,6 +12,7 @@ namespace ArcanoidGame
 	class GameLogic
 	{
 	public:
+		GameLogic(std::shared_ptr <Window> window);
 		void OnTick();
 		bool TryInit();
 
@@ -18,6 +20,7 @@ namespace ArcanoidGame
 		std::unique_ptr <GameFactory> _gameFactory;
 		std::unique_ptr <CollisionSystem> _collisionSystem;
 		std::vector<GameObject*> _gameObjects;
+		std::shared_ptr	<Window> _window;
 
 
 		GameObject* gm;

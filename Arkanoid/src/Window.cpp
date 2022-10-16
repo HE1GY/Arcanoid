@@ -4,14 +4,14 @@ namespace ArcanoidGame
 {
 	void Window::OnPreInit(int& width, int& height, bool& fullscreen)
 	{
-		width = _width;
-		height = _height;
+		width = Width;
+		height = Height;
 		fullscreen = _fullscreen;
 	}
 	void Window::SetParameters(int width, int height, bool fullscreen)
 	{
-		_width = width;
-		_height = height;
+		Width = width;
+		Height = height;
 		_fullscreen = fullscreen;
 	}
 	bool Window::TryInit()

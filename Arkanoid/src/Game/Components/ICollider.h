@@ -5,6 +5,8 @@ namespace ArcanoidGame
 {
 	class ICollider :public IComponent
 	{
-		virtual void OnCollision(GameObject& other) = 0;
+	public:
+		virtual Vector& GetNormalAt(Vector& point) = 0;
+		virtual void OnCollision(ICollider& other,Vector& contactPoint) = 0;
 	};
 }

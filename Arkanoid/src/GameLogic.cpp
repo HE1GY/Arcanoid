@@ -11,29 +11,17 @@
 namespace ArcanoidGame
 {
 
+	GameLogic::GameLogic(std::shared_ptr <Window> window)
+		:_window(window)
+	{
+	}
+
 	void GameLogic::OnTick()
 	{
 
 		std::cout << "(" << InputManager::MouseX <<"  ,  " << InputManager::MouseY << ")" << std::endl;
 
-		/*int w;
-		int h;
-		gm->GetSize(w, h);
-
-		int clX = std::clamp(gm2->Position.X, gm->Position.X , gm->Position.X + 2*w);
-		int clY = std::clamp(gm2->Position.Y, gm->Position.Y, gm->Position.Y + 2*h);
-
-		int dist = Vector::Magnitude(gm2->Position, *(new Vector(clX,clY)));;
-
-		gm2->GetSize(w, h);
-
-		if(h  > dist)
-		{
-			w++;
-		}*/
-
 		_collisionSystem->CheckAllCollision();
-
 		for(auto& gm : _gameObjects)
 		{
 			gm->UpdateComponents();
@@ -41,7 +29,7 @@ namespace ArcanoidGame
 
 		for(auto& gm: _gameObjects)
 		{
-			drawSprite(gm->Sprite, gm->Position.X, gm->Position.Y);
+			drawSprite(gm->Sprite, std::round(gm->Position.X), std::round(gm->Position.Y));
 		}
 	}
 
@@ -74,15 +62,15 @@ namespace ArcanoidGame
 		_gameObjects.push_back(gm2);
 
 		gm2->Position.X = 500;
-		gm2->Position.Y = 100;
+		gm2->Position.Y = 200;
 		gm2->SetSize(100, 100);
-		Vector startVelocity(0, 1);
+		Vector startDirection(1, 1);
 
-		BallMover* ballMover = new BallMover(startVelocity);
+		BallMover* ballMover = new BallMover(startDirection,_window);
 		ballMover->IsMoving = true;
 		ballMover->Speed = 1;
 
-		CirculCollider* circul = new CirculCollider();
+		CirculCollider* circul = new CirculCollider(ballMover);
 		_collisionSystem->AddCirculCollider(circul);
 
 		gm2->AddComponent(ballMover);

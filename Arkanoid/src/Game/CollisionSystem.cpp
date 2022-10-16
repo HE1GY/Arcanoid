@@ -17,12 +17,13 @@ namespace ArcanoidGame
 	{
 		for(auto& box: _boxColliders)
 		{
-			Vector& closesPoint=box->ClosestPoint(_ballCollider->Center);
-			int distance=Vector::Magnitude(closesPoint, _ballCollider->Center);
+			Vector& closesPoint=box->ClosestPointTo(_ballCollider->Center);
+			int distance=Vector::MagnitudeBetween(closesPoint, _ballCollider->Center);
+
 			if(distance < _ballCollider->Radius)
 			{
-				box->OnCollision(*_ballCollider->Parent);
-				_ballCollider->OnCollision(*box->Parent);
+				box->OnCollision(*_ballCollider, closesPoint);
+				_ballCollider->OnCollision(*box, closesPoint);
 			}
 		}
 	}
