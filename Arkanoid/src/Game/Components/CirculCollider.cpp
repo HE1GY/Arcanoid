@@ -2,10 +2,6 @@
 
 namespace ArcanoidGame
 {
-	CirculCollider::CirculCollider(BallMover* ballMover):
-		_ballMover(ballMover),Radius(0),Center(0,0)
-	{
-	}
 
 	void CirculCollider::Update()
 	{
@@ -17,7 +13,7 @@ namespace ArcanoidGame
 
 	void CirculCollider::OnCollision(ICollider& other, Vector& contactPoint)
 	{
-		_ballMover->Reflect(other.GetNormalAt(contactPoint));
+		CollidedEvent->OnCollision(other, contactPoint);
 	}
 
 	Vector& CirculCollider::GetNormalAt(Vector& point)

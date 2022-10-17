@@ -1,8 +1,8 @@
 #pragma once
 #include "Vector.h"
-#include "InputManager.h"
 #include <vector>
-#include "IComponent.h"
+#include "Framework.h"
+
 
 
 
@@ -10,21 +10,37 @@ namespace ArcanoidGame
 {
 	class IComponent;
 
+	enum ObjectType
+	{
+		Platform,
+		Ball,
+		Block,
+		Ability,
+		Area
+	};
+
 	class GameObject
 	{
 	public:
+		ObjectType ObjType;
+		bool Enable;
+		bool Visualization;
 		Vector Position;
-		Sprite* Sprite; 
-
+		Vector Size;
+		GameObject(Sprite* sprite, ObjectType type);
 		 void GetSize(int& w, int& h);
 		 void SetSize(int w, int h);
 
 		 void AddComponent(IComponent* component);
-
-		 virtual void Destroy();
 		 void UpdateComponents();
+		 void Draw();
+		 
 	private:
-		Vector _size;
-		std::vector <IComponent*> _components;
+		std::vector <IComponent*> Components;
+		Sprite* _sprite;
 	};
+
+	
+
+
 }

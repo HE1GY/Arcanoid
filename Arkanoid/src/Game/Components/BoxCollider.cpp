@@ -1,5 +1,6 @@
 #include "BoxCollider.h"
 
+
 namespace ArcanoidGame
 {
 	void BoxCollider::Update()
@@ -47,6 +48,9 @@ namespace ArcanoidGame
 
 	void BoxCollider::OnCollision(ICollider& other, Vector& contactPoint)
 	{
-		
+		if(CollidedEvent != nullptr)
+		{
+			CollidedEvent->OnCollision(other, contactPoint);
+		}
 	}
 }

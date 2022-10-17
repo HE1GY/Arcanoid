@@ -1,25 +1,26 @@
 #include "BallMover.h"
-#include <iostream>
 namespace ArcanoidGame
 {
-	BallMover::BallMover(const Vector& direction, std::shared_ptr <Window> window)
-		:_direction(direction),IsMoving(false),Speed(0),_window(window)
+	BallMover::BallMover(std::shared_ptr <Window> window)
+		:Direction(Vector()),IsMoving(false),Speed(0),_window(window)
 	{
 	}
 
 	void BallMover::Update()
 	{
-
 		if(IsMoving)
 		{
-			Parent->Position += _direction * Speed;
+			Parent->Position += Direction * Speed;
 			WallReflect();
 		}
 	}
 
 	void BallMover::Reflect(Vector& normal)
 	{
-		_direction = Vector::Reflect(_direction, normal);
+		if(Vector::DotProduct(normal, Direction) < 0)
+		{
+			Direction = Vector::Reflect(Direction, normal);
+		}
 	}
 
 	void BallMover::WallReflect()
@@ -45,4 +46,5 @@ namespace ArcanoidGame
 			Reflect(*new Vector(1, 0));
 		}
 	}
+
 }

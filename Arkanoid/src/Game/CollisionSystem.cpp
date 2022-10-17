@@ -7,23 +7,33 @@ namespace ArcanoidGame
 		_boxColliders.push_back(collider);
 	}
 
+
 	void CollisionSystem::AddCirculCollider(CirculCollider* collider)
 	{
-		_ballCollider = collider;
+		_circulColliders.push_back(collider);
 	}
 
 
 	void CollisionSystem::CheckAllCollision()
 	{
-		for(auto& box: _boxColliders)
+		for(auto& boxCollider: _boxColliders)
 		{
-			Vector& closesPoint=box->ClosestPointTo(_ballCollider->Center);
-			int distance=Vector::MagnitudeBetween(closesPoint, _ballCollider->Center);
-
-			if(distance < _ballCollider->Radius)
+			if(boxCollider->Parent->Enable)
 			{
-				box->OnCollision(*_ballCollider, closesPoint);
-				_ballCollider->OnCollision(*box, closesPoint);
+				for(auto& circulCollider : _circulColliders)
+				{
+					if(circulCollider->Parent->Enable)
+					{
+						Vector& closesPoint = boxCollider->ClosestPointTo(circulCollider->Center);
+						int distance = Vector::MagnitudeBetween(closesPoint, circulCollider->Center);
+
+						if(distance < circulCollider->Radius)
+						{
+							circulCollider->OnCollision(*boxCollider, closesPoint);
+							boxCollider->OnCollision(*circulCollider, closesPoint);
+						}
+					}
+				}
 			}
 		}
 	}

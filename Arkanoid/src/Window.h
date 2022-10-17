@@ -13,6 +13,9 @@ namespace ArcanoidGame
 		 int Width;
 		 int Height;
 
+		 inline static int DefaultWidth;
+		 inline static int DefaultHeight;
+
 	private:
 		bool _fullscreen;
 	};

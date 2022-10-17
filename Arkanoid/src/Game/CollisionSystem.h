@@ -1,5 +1,4 @@
 #pragma once
-#include "GameObject.h"
 #include <vector>
 #include "ICollider.h"
 #include "BoxCollider.h"
@@ -16,6 +15,6 @@ namespace ArcanoidGame
 		
 	private:
 		std::vector<BoxCollider*> _boxColliders;
-		CirculCollider* _ballCollider;
+		std::vector<CirculCollider*> _circulColliders;
 	};
 }

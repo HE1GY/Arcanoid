@@ -139,8 +139,12 @@
     <ClCompile Include="src\Game\Components\BallMover.cpp" />
     <ClCompile Include="src\Game\Components\BoxCollider.cpp" />
     <ClCompile Include="src\Game\Components\CirculCollider.cpp" />
-    <ClCompile Include="src\Game\Components\InputComponent.cpp" />
+    <ClCompile Include="src\Game\Components\CollisionAllongMove.cpp" />
+    <ClCompile Include="src\Game\Components\ExplosionBlockDeath.cpp" />
+    <ClCompile Include="src\Game\Components\CommonBlockDeath.cpp" />
+    <ClCompile Include="src\Game\Components\PlatformInput.cpp" />
     <ClCompile Include="src\Game\GameObject.cpp" />
+    <ClCompile Include="src\Game\LevelBuilder.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\GameLogic.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
@@ -148,16 +152,23 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisonAlongMove.h" />
+    <ClInclude Include="src\Game\BlockType.h" />
     <ClInclude Include="src\Game\CollisionSystem.h" />
     <ClInclude Include="src\Game\Components\BallMover.h" />
+    <ClInclude Include="src\Game\Components\CollisionAlongMove.h" />
+    <ClInclude Include="src\Game\Components\CollisionEvent.h" />
     <ClInclude Include="src\Game\Components\BoxCollider.h" />
     <ClInclude Include="src\Game\Components\CirculCollider.h" />
+    <ClInclude Include="src\Game\Components\ExplosionBlockDeath.h" />
     <ClInclude Include="src\Game\Components\ICollider.h" />
     <ClInclude Include="src\Game\Components\IComponent.h" />
-    <ClInclude Include="src\Game\Components\InputComponent.h" />
+    <ClInclude Include="src\Game\Components\CommonBlockDeath.h" />
+    <ClInclude Include="src\Game\Components\PlatformInput.h" />
     <ClInclude Include="src\Game\GameFactory.h" />
     <ClInclude Include="src\GameLogic.h" />
     <ClInclude Include="src\Game\GameObject.h" />
+    <ClInclude Include="src\Game\LevelBuilder.h" />
     <ClInclude Include="src\Game\Vector.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Utility.h" />

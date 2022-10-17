@@ -4,38 +4,47 @@
 
 namespace ArcanoidGame
 {
+
+	 GameObject::GameObject(Sprite* sprite,ObjectType type) :
+		_sprite(sprite),Enable(true),Visualization(true), ObjType(type)
+	{
+	}
 	void GameObject::GetSize(int& w, int& h)
 	{
-		w = _size.X;
-		h = _size.Y;
+		w = Size.X;
+		h = Size.Y;
 	}
 	void GameObject::SetSize(int w, int h)
 	{
-		_size.X = w;
-		_size.Y=h;
-		setSpriteSize(Sprite, w, h);
+		Size.X = w;
+		Size.Y=h;
+		setSpriteSize(_sprite, w, h);
 	}
 
 	void GameObject::AddComponent(IComponent* component)
 	{
 		component->Parent = this;
-		_components.push_back(component);
+		Components.push_back(component);
 	}
 
 
 	void GameObject::UpdateComponents()
 	{
-		for(auto& component: _components)
+		if(Enable)
 		{
-			component->Update();
+			for(auto& component : Components)
+			{
+				component->Update();
+			}
 		}
 	}
 
-
-	void GameObject::Destroy()
+	void GameObject::Draw()
 	{
-		destroySprite(Sprite);
+		if(Enable && Visualization)
+		{
+			drawSprite(_sprite, Position.X, Position.Y);
+		}
 	}
-
 
 }

@@ -95,8 +95,12 @@ void ParseWindowParameters(int& width, int& heigth, int& argc, char* argv[]);
 
 int main(int argc, char* argv[])
 {
-	int width;
-	int height;
+	int width=960;
+	int height=540;
+
+	ArcanoidGame::Window::DefaultHeight = height;
+	ArcanoidGame::Window::DefaultWidth = width;
+
 	ParseWindowParameters(width, height, argc, argv);
 
 	std::unique_ptr<Arkanoid> arcanoid = std::make_unique<Arkanoid>();
@@ -108,24 +112,22 @@ int main(int argc, char* argv[])
 
 void ParseWindowParameters(int& width, int& height, int& argc, char* argv[])
 {
-	width = 960;
-	height = 540;
 	int windowArgCount = 0;
 
-	for(size_t i = 0; i < argc; i++)
+	for(size_t _frameDelayForExplosion = 0; _frameDelayForExplosion < argc; _frameDelayForExplosion++)
 	{
-		if(strcmp(argv[i], "-window") == 0)
+		if(strcmp(argv[_frameDelayForExplosion], "-window") == 0)
 		{
 			windowArgCount = 2;
 		}
 		else if(windowArgCount == 2)
 		{
-			width = strtol(argv[i], NULL, 10);
+			width = strtol(argv[_frameDelayForExplosion], NULL, 10);
 			windowArgCount--;
 		}
 		else if(windowArgCount == 1)
 		{
-			height = strtol(argv[i], NULL, 10);
+			height = strtol(argv[_frameDelayForExplosion], NULL, 10);
 			windowArgCount--;
 		}
 	}
