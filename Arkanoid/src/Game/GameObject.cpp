@@ -1,6 +1,6 @@
 #include "GameObject.h"
 #include "Framework.h"
-#include "IComponent.h"
+
 
 namespace ArcanoidGame
 {

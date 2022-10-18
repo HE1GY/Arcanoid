@@ -12,12 +12,17 @@ namespace ArcanoidGame
 	}
 	void ExplosionBlockDeath::OnCollision(ICollider& other, Vector& contactPoint)
 	{
-		if(Parent->Enable && !_explosionBall->Enable)
+		if(other.Parent->ObjType == Ball)
 		{
-			_explosionBall->Position = Vector(Parent->Position.X-17, Parent->Position.Y - _explosionBall->Size.Y/4-10);
-			_explosionBall->Enable = true;
-			_frameDelayForExplosion = 2;
+			if(Parent->Enable && !_explosionBall->Enable)
+			{
+				_explosionBall->Position = Vector(Parent->Position.X - 17, Parent->Position.Y - _explosionBall->Size.Y / 4 - 10);
+				_explosionBall->Enable = true;
+				_frameDelayForExplosion = 2;
+				_killer = &other;
+			}
 		}
+		
 	}
 	void ExplosionBlockDeath::Update()
 	{
@@ -30,6 +35,10 @@ namespace ArcanoidGame
 		{
 			_explosionBall->Enable = false;
 			Parent->Enable=false;
+			for(auto& listener : DeathListeners)
+			{
+				listener->OnDeath(_killer->Parent);
+			}
 		}
 	}
 }

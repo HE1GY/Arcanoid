@@ -4,14 +4,15 @@
 #include "ExplosionBlockDeath.h"
 #include "CollisionAlongMove.h"
 
+
+
 namespace ArcanoidGame
 {
-	GameFactory::GameFactory(std::shared_ptr <CollisionSystem> collisionSys, std::shared_ptr <Window> window):
+	GameFactory::GameFactory(std::shared_ptr <CollisionSystem> collisionSys, std::shared_ptr <Window> window) :
 	_collisionSys(collisionSys),_window(window)
 	{
 	}
 
-	
 
 	int GameFactory::GetScaledSize(const int& defaultWindowValue, const int& currentWindowValue, const int& defautValue)
 	{
@@ -33,15 +34,20 @@ namespace ArcanoidGame
 		ball->AddComponent(collisionAlongMove);
 
 		CirculCollider* circul = new CirculCollider();
-		circul->CollidedEvent = collisionAlongMove;
+		circul->CollisionListeners.push_back(collisionAlongMove);
 		ball->AddComponent(circul);
 		_collisionSys->AddCirculCollider(circul);
 
+		BallSizeModifier* modifier = new BallSizeModifier();
+		ball->AddComponent(modifier);
+		_abilityReceiver-> ModifierEventListener= modifier; 
 
 		//TO DELETE
 		ballMover->IsMoving = true;
 		ballMover->Speed = 2;
 		ballMover->Direction=Vector(1,1);
+
+		MoverBall = ball;
 
 		return ball;
 	}
@@ -62,6 +68,14 @@ namespace ArcanoidGame
 		PlatformInput* controll = new PlatformInput(_window);
 		platform->AddComponent(controll);
 
+		AbilityReceiver* receiver = new AbilityReceiver();
+		platform->AddComponent(receiver);
+		_abilityReceiver = receiver;
+
+		box->CollisionListeners.push_back(receiver);
+
+		PlatformGO = platform;
+
 		return platform;
 	}
 
@@ -79,7 +93,9 @@ namespace ArcanoidGame
 
 		CommonBlockDeath* death = new CommonBlockDeath();
 		commonBlock->AddComponent(death);
-		box->CollidedEvent = death;
+		box->CollisionListeners.push_back(death);
+
+		death->DeathListeners.push_back(LevelState);
 
 		return commonBlock;
 	}
@@ -96,7 +112,9 @@ namespace ArcanoidGame
 		_collisionSys->AddBoxCollider(box);
 
 		ExplosionBlockDeath* death = new ExplosionBlockDeath(this);
-		box->CollidedEvent = death;
+		box->CollisionListeners.push_back( death);
+
+		death->DeathListeners.push_back(LevelState);
 		explosionBlock->AddComponent(death);
 
 		return explosionBlock;
@@ -106,38 +124,55 @@ namespace ArcanoidGame
 
 	GameObject* GameFactory::CreateEncresesAbility()
 	{
-		GameObject* ability = new GameObject(createSprite("res/data/62-Breakout-Tiles.png"),Ability);
+		GameObject* ability = new GameObject(createSprite("res/data/62-Breakout-Tiles.png"), AbilityEncreses);
 		RegisterGameObject(ability);
-		int width = GetScaledSize(Window::DefaultWidth, _window->Width, 25);
-		int height = GetScaledSize(Window::DefaultHeight, _window->Height, 25);
+		int width = GetScaledSize(Window::DefaultWidth, _window->Width, 35);
+		int height = GetScaledSize(Window::DefaultHeight, _window->Height, 35);
 		ability->SetSize(width, height);
 
 		CirculCollider* collider = new CirculCollider();
 		ability->AddComponent(collider);
 		_collisionSys->AddCirculCollider(collider);
-
+	
 		BallMover* ballMover = new BallMover(_window);
 		ballMover->IsMoving=true;
 		ballMover->Direction=Vector(0,1);
 		ballMover->Speed = 1;
 		ability->AddComponent(ballMover);
 
-		CollisionAlongMove* collisionAlongMove = new CollisionAlongMove(Ability, ballMover);
+		CollisionAlongMove* collisionAlongMove = new CollisionAlongMove(AbilityEncreses, ballMover);
 		ability->AddComponent(collisionAlongMove);
 
-		collider->CollidedEvent = collisionAlongMove;
-
+		CollisionEvent* collisionEvent = collisionAlongMove;
+		collider->CollisionListeners.push_back(collisionEvent);
+		ability->UpdateComponents();
 		return ability;
 	}
 	GameObject* GameFactory::CreateDecreasesAbility()
 	{
-		GameObject* ability =new GameObject(createSprite("res/data/64-Breakout-Tiles.png"),Ability);
+		GameObject* ability =new GameObject(createSprite("res/data/64-Breakout-Tiles.png"), AbilityDecreases);
 		RegisterGameObject(ability);
-		int width = GetScaledSize(Window::DefaultWidth, _window->Width, 25);
-		int height = GetScaledSize(Window::DefaultHeight, _window->Height, 25);
+		int width = GetScaledSize(Window::DefaultWidth, _window->Width, 15);
+		int height = GetScaledSize(Window::DefaultHeight, _window->Height, 15);
 		ability->SetSize(width, height);
 
+		CirculCollider* collider = new CirculCollider();
+		ability->AddComponent(collider);
+		_collisionSys->AddCirculCollider(collider);
+		
 
+		BallMover* ballMover = new BallMover(_window);
+		ballMover->IsMoving = true;
+		ballMover->Direction = Vector(0, 1);
+		ballMover->Speed = 1;
+		ability->AddComponent(ballMover);
+
+		CollisionAlongMove* collisionAlongMove = new CollisionAlongMove(AbilityDecreases, ballMover);
+		ability->AddComponent(collisionAlongMove);
+
+		CollisionEvent* collisionEvent = collisionAlongMove;
+		collider->CollisionListeners.push_back(collisionEvent);
+		ability->UpdateComponents();
 		return ability;
 	}
 	void GameFactory::RegisterGameObject(GameObject* gameObject)

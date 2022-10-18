@@ -1,5 +1,6 @@
 #include "PlatformInput.h"
 #include "InputManager.h"
+#include "GameObject.h"
 
 namespace ArcanoidGame
 {

@@ -20,7 +20,7 @@ namespace ArcanoidGame
 		{
 			if(boxCollider->Parent->Enable)
 			{
-				for(auto& circulCollider : _circulColliders)
+				for(CirculCollider* circulCollider : _circulColliders)
 				{
 					if(circulCollider->Parent->Enable)
 					{

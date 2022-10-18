@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "BallMover.h"
 #include "CollisionEvent.h"
+#include "ICollider.h"
 
 
 namespace ArcanoidGame
@@ -15,5 +16,6 @@ namespace ArcanoidGame
 	private:
 		BallMover* _ballMove;
 		ObjectType _type;
+		GameObject* _collisionWith;
 	};
 }

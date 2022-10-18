@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 #include "Window.h"
-#include "Vector.h"
 #include "IComponent.h"
+#include "GameObject.h"
 
 namespace ArcanoidGame
 {

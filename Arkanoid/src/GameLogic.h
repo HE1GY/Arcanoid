@@ -5,6 +5,7 @@
 #include <vector>
 #include "GameFactory.h"
 #include "LevelBuilder.h"
+#include "LevelState.h"
 
 
 namespace ArcanoidGame
@@ -21,5 +22,6 @@ namespace ArcanoidGame
 		std::shared_ptr<CollisionSystem> _collisionSystem;
 		std::shared_ptr<Window> _window;
 		std::shared_ptr<LevelBuilder> _levelBuilder;
+		std::shared_ptr<LevelState> _levelState;
 	};
 }

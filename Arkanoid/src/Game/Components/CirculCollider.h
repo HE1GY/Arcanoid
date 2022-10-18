@@ -1,14 +1,12 @@
 #pragma once
 #include "ICollider.h"
 #include "BallMover.h"
-#include "CollisionEvent.h."
 
 namespace ArcanoidGame
 {
 	class CirculCollider:public ICollider
 	{
 	public :
-		CollisionEvent* CollidedEvent;
 		int Radius;
 		Vector Center;
 

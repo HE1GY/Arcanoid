@@ -1,7 +1,10 @@
 #pragma once
-#include "ICollider.h"
+
 namespace ArcanoidGame
 {
+	class ICollider;
+	class Vector;
+
 	class CollisionEvent
 	{
 	public:

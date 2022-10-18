@@ -3,7 +3,7 @@
 namespace ArcanoidGame
 {
 	LevelBuilder::LevelBuilder(std::shared_ptr<GameFactory> gameFactory, std::shared_ptr <Window>window)
-		:_gameFactory(gameFactory),_window(window)
+		:_gameFactory(gameFactory),_window(window),BuiltBlock(0)
 	{
 	}
 
@@ -11,6 +11,7 @@ namespace ArcanoidGame
 	{
 		GameObject* platform = _gameFactory->CreatePlatform();
 		platform->Position = Vector(_window->Width / 2 - platform->Size.X / 2,_window->Height - platform->Size.Y);
+
 		GameObject* ball = _gameFactory->CreateBall();
 		ball->Position = Vector(_window->Width / 2 - ball->Size.X / 2, _window->Height - platform->Size.Y- ball->Size.Y);
 
@@ -25,6 +26,8 @@ namespace ArcanoidGame
 				{
 					continue;
 				}
+				BuiltBlock++;
+				_blocks.push_back(Block);
 				Block->Position.X = 15+x * (Block->Size.X + horizontalSpace);
 				Block->Position.Y = y * (Block->Size.Y + VerticalSpace);
 			}
@@ -50,5 +53,14 @@ namespace ArcanoidGame
 				break;
 		}
 		return block;
+	}
+
+
+	void LevelBuilder::ResetBlocks()
+	{
+		for(size_t i = 0; i < _blocks.size(); i++)
+		{
+			_blocks[i]->Enable = true;
+		}
 	}
 }

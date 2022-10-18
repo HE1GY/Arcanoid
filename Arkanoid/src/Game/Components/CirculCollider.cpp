@@ -1,5 +1,5 @@
 #include "CirculCollider.h"
-
+#include "CollisionEvent.h"
 namespace ArcanoidGame
 {
 
@@ -13,7 +13,8 @@ namespace ArcanoidGame
 
 	void CirculCollider::OnCollision(ICollider& other, Vector& contactPoint)
 	{
-		CollidedEvent->OnCollision(other, contactPoint);
+		for(auto& collisionListener : CollisionListeners)
+			collisionListener->OnCollision(other, contactPoint);
 	}
 
 	Vector& CirculCollider::GetNormalAt(Vector& point)

@@ -2,20 +2,20 @@
 #include "Vector.h"
 #include <vector>
 #include "Framework.h"
-
+#include "IComponent.h"
 
 
 
 namespace ArcanoidGame
 {
-	class IComponent;
 
 	enum ObjectType
 	{
 		Platform,
 		Ball,
 		Block,
-		Ability,
+		AbilityDecreases,
+		AbilityEncreses,
 		Area
 	};
 

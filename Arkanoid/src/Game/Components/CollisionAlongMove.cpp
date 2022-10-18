@@ -10,24 +10,33 @@ namespace ArcanoidGame
 
 	void CollisionAlongMove::Update()
 	{
+		if(_type == AbilityDecreases || _type == AbilityEncreses)
+		{
+			if(_collisionWith != nullptr && _collisionWith->Enable)
+			{
+				_ballMove->IsMoving = false;
+			}
+			else
+			{
+				_collisionWith = nullptr;
+				_ballMove->IsMoving = true;
+			}
+		}
 	}
 	void CollisionAlongMove::OnCollision(ICollider& other, Vector& contactPoint)
 	{
-		if(_type == Ability)
+		if(_type == AbilityDecreases || _type == AbilityEncreses)
 		{
 			switch(other.Parent->ObjType)
 			{
-				case ArcanoidGame::Platform:
+				case ArcanoidGame::Block:
 					_ballMove->IsMoving=false;
+					_collisionWith = other.Parent;
 					break;
 				case ArcanoidGame::Ball:
 					break;
-				case ArcanoidGame::Block:
+				case ArcanoidGame::Platform:
 					Parent->Enable = false;
-					break;
-				case ArcanoidGame::Ability:
-					break;
-				case ArcanoidGame::Area:
 					break;
 				default:
 					break;
@@ -44,10 +53,6 @@ namespace ArcanoidGame
 					break;
 				case ArcanoidGame::Block:
 					_ballMove->Reflect(other.GetNormalAt(contactPoint));
-					break;
-				case ArcanoidGame::Ability:
-					break;
-				case ArcanoidGame::Area:
 					break;
 				default:
 					break;

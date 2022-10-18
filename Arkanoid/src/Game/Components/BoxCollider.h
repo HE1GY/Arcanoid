@@ -1,14 +1,12 @@
 #pragma once
 #include "ICollider.h"
-#include "CollisionEvent.h."
+#include "Vector.h"
 
 namespace ArcanoidGame
 {
 	class BoxCollider : public ICollider 
 	{
 	public:
-		CollisionEvent* CollidedEvent;
-
 		Vector Center;
 		Vector& ClosestPointTo(Vector& target);
 		void Update()override;
